@@ -4,16 +4,26 @@ graph = {'A': ['B', 'C'],
          'C': ['A', 'B']
          }
 
+Graph = dict[str, list[str]]
 
-def solver(graph G):
-    biggest_clique = []
-    for v in G:
-        for e in v:
-            if e in biggest_clique:
+
+# def solver(G: Graph):
+#     biggest_clique = []
+#     for v, e in G:
+#         for e in v.values():
+#             if e in biggest_clique:
 
 
 def main() -> None:
-    pass
+    graph = {'A': ['B', 'C'],
+         'B': ['A', 'C'],
+         'C': ['A', 'B']
+         }
+    
+    for v, e in graph.values():
+        print(f"Vertex: {v}")
+        print(f"Edge: {e}")
+        print('----')
 
 
 if __name__ == "__main__":
