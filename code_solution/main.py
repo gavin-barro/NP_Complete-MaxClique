@@ -20,7 +20,7 @@ def main() -> None:
          'C': ['A', 'B']
          }
     
-    for v, e in graph.values():
+    for v, e in graph.items():
         print(f"Vertex: {v}")
         print(f"Edge: {e}")
         print('----')
