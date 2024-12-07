@@ -30,6 +30,7 @@ def find_max_clique(graph: Graph) -> List[str]:
 
     return biggest_clique
 
+
 def generate_graph(num_edges: int, edges: list[str]) -> Graph:
     graph = {}
     # TODO
@@ -51,7 +52,7 @@ def main() -> None:
     }
     max_clique = find_max_clique(graph)
     print("Max clique: ", max_clique)
-    
+
     graph2 = {
         'A': ['B', 'C'],
         'B': ['A', 'C'],
@@ -61,7 +62,7 @@ def main() -> None:
     }
     max_clique2 = find_max_clique(graph2)
     print("Max clique: ", max_clique2)
-    
+
     graph3 = {
         'a': ['b', 'c'],
         'b': ['a', 'c'],
@@ -69,7 +70,7 @@ def main() -> None:
     }
     max_clique3 = find_max_clique(graph3)
     print("Max clique: ", max_clique3)
-    
+
     graph4 = {
         'a': ['b'],
         'b': ['a', 'c', 'd'],
@@ -78,7 +79,7 @@ def main() -> None:
     }
     max_clique4 = find_max_clique(graph4)
     print("Max clique: ", max_clique4)
-    
+
     graph5 = {
         'a': ['b', 'c'],
         'b': ['a'],
@@ -86,7 +87,7 @@ def main() -> None:
     }
     max_clique5 = find_max_clique(graph5)
     print("Max clique: ", max_clique5)
-    
+
     # Begin edge case tests
     print("Edge cases: ")
 
@@ -120,7 +121,7 @@ def main() -> None:
     max_clique9 = find_max_clique(graph9)
     print("Max clique: ", max_clique9)
 
-    #Chain of Vertices
+    # Chain of Vertices
     graph10 = {
         'a': ['b'],
         'b': ['a', 'c'],
@@ -158,7 +159,8 @@ def main() -> None:
         'e': ['f'],
         'f': ['e']
     }
-    max_clique13 = find_max_clique(graph13)    #TODO: Should be ABCD?
+    # TODO: Should be ABCD? <- I think it should just be abc because d and a aren't connected
+    max_clique13 = find_max_clique(graph13)
     print("Max clique: ", max_clique13)
 
     # Graph with Isolated Vertices
@@ -179,7 +181,8 @@ def main() -> None:
         'c': ['a', 'd'],
         'd': ['b', 'c']
     }
-    max_clique15 = find_max_clique(graph15)    #TODO: Should be ABCD?
+    # TODO: Should be ABCD? <- Again, I think it should just be abc because a and d aren't connected, they all have to be connected to each other
+    max_clique15 = find_max_clique(graph15)
     print("Max clique: ", max_clique15)
 
     # Fully Connected Subgraphs
@@ -191,7 +194,6 @@ def main() -> None:
     }
     max_clique16 = find_max_clique(graph16)
     print("Max clique: ", max_clique16)
-
 
     # for v, e in graph.items():
     #     print(f"Vertex: {v}")
