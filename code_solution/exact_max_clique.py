@@ -64,10 +64,7 @@ def generate_graph(edges: list[str]) -> Graph:
 
 
 def format_graph(clique: list[str]):
-    format_clique = ""
-    for v in clique:
-        format_clique += v + " "
-    return format_clique
+    return " ".join(clique)
 
 
 def main() -> None:
