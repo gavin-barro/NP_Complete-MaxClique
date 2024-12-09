@@ -1,11 +1,9 @@
-from typing import List, Dict
-
 # Key: the nodes themselves
 # Value: The nodes' neightbors that are connected with an edge
 Graph = dict[str, list[str]]
 
 
-def is_clique(graph: Graph, vertices: List[str]) -> bool:
+def is_clique(graph: Graph, vertices: list[str]) -> bool:
     for v in vertices:  # loops through vertices
         for u in vertices:  # loops through every other vertex in the graph
             # sees if first vertex is different than other vertex and if the first vertex is not a niehgbor of the second
@@ -14,7 +12,7 @@ def is_clique(graph: Graph, vertices: List[str]) -> bool:
     return True  # if all vertices are connected they are a clique
 
 
-def find_max_clique_approx(graph: Graph) -> List[str]:
+def find_max_clique_approx(graph: Graph) -> list[str]:
     biggest_clique = []  # keeps track of biggest clique so far
     # sorts from highest to smallest in terms of vertices
     vertices = sorted(graph.keys(), key=lambda v: len(graph[v]), reverse=True)
@@ -37,17 +35,17 @@ def generate_graph(edges: list[str]) -> Graph:
     # Parse edges to build the graph
     for edge in edges:
         u, v = edge.split()
-        if u not in graph:
-            graph[u] = []
-        if v not in graph:
-            graph[v] = []
-        graph[u].append(v)
-        graph[v].append(u)
+        if u.upper() not in graph:
+            graph[u.upper()] = []
+        if v.upper() not in graph:
+            graph[v.upper()] = []
+        graph[u.upper()].append(v.upper())
+        graph[v.upper()].append(u.upper())
 
     return graph
 
 
-def format_graph(clique: list[str]):
+def format_graph(clique: list[str]) -> str:
     return " ".join(clique)
 
 
