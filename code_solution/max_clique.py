@@ -31,15 +31,33 @@ def find_max_clique(graph: Graph) -> List[str]:
     return biggest_clique
 
 
-def generate_graph(num_edges: int, edges: list[str]) -> Graph:
+def generate_graph(edges: list[str]) -> Graph:
     graph = {}
-    # TODO
-    for _ in range(num_edges + 1):
-        pass
+    
+    # Parse edges to build the graph
+    for edge in edges:
+        u, v = edge.split()
+        if u not in graph:
+            graph[u] = []
+        if v not in graph:
+            graph[v] = []
+        graph[u].append(v)
+        graph[v].append(u)
+    
     return graph
 
 
 def main() -> None:
+    # Testing generate graph function
+    num_edges = input("How any edges are there (list an int): ")
+    edges = []
+    for _ in range(int(num_edges)):
+        edge = input("List an edge (ex. A B): ")
+        edges.append(edge)
+    example_graph = generate_graph(edges)
+    max_clique_ex = find_max_clique(example_graph)
+    print("Max clique: ", max_clique_ex)
+    
     # Basic test cases
     graph = {
         'A': ['B', 'C'],
