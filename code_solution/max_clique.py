@@ -33,7 +33,7 @@ def find_max_clique(graph: Graph) -> List[str]:
 
 def generate_graph(edges: list[str]) -> Graph:
     graph = {}
-    
+
     # Parse edges to build the graph
     for edge in edges:
         u, v = edge.split()
@@ -43,8 +43,15 @@ def generate_graph(edges: list[str]) -> Graph:
             graph[v] = []
         graph[u].append(v)
         graph[v].append(u)
-    
+
     return graph
+
+
+def format_graph(clique: list[str]):
+    format_clique = ""
+    for v in clique:
+        format_clique += v + " "
+    return format_clique
 
 
 def main() -> None:
@@ -56,167 +63,167 @@ def main() -> None:
         edges.append(edge)
     example_graph = generate_graph(edges)
     max_clique_ex = find_max_clique(example_graph)
-    print("Max clique: ", max_clique_ex)
-    
-    # Basic test cases
-    graph = {
-        'A': ['B', 'C'],
-        'B': ['A', 'C', 'F'],
-        'C': ['A', 'B', 'G'],
-        'D': ['E', 'F', 'G'],
-        'E': ['D', 'F', 'G'],
-        'F': ['D', 'E', 'G'],
-        'G': ['D', 'E', 'F']
-    }
-    max_clique = find_max_clique(graph)
-    print("Max clique: ", max_clique)
+    print("Max clique: ", format_graph(max_clique_ex))
 
-    graph2 = {
-        'A': ['B', 'C'],
-        'B': ['A', 'C'],
-        'C': ['A', 'B', 'D', 'E'],
-        'D': ['C', 'E'],
-        'E': ['C', 'D']
-    }
-    max_clique2 = find_max_clique(graph2)
-    print("Max clique: ", max_clique2)
+#     # Basic test cases
+#     graph = {
+#         'A': ['B', 'C'],
+#         'B': ['A', 'C', 'F'],
+#         'C': ['A', 'B', 'G'],
+#         'D': ['E', 'F', 'G'],
+#         'E': ['D', 'F', 'G'],
+#         'F': ['D', 'E', 'G'],
+#         'G': ['D', 'E', 'F']
+#     }
+#     max_clique = find_max_clique(graph)
+#     print("Max clique: ", max_clique)
 
-    graph3 = {
-        'a': ['b', 'c'],
-        'b': ['a', 'c'],
-        'c': ['a', 'b']
-    }
-    max_clique3 = find_max_clique(graph3)
-    print("Max clique: ", max_clique3)
+#     graph2 = {
+#         'A': ['B', 'C'],
+#         'B': ['A', 'C'],
+#         'C': ['A', 'B', 'D', 'E'],
+#         'D': ['C', 'E'],
+#         'E': ['C', 'D']
+#     }
+#     max_clique2 = find_max_clique(graph2)
+#     print("Max clique: ", max_clique2)
 
-    graph4 = {
-        'a': ['b'],
-        'b': ['a', 'c', 'd'],
-        'c': ['b', 'd'],
-        'd': ['b', 'c']
-    }
-    max_clique4 = find_max_clique(graph4)
-    print("Max clique: ", max_clique4)
+#     graph3 = {
+#         'a': ['b', 'c'],
+#         'b': ['a', 'c'],
+#         'c': ['a', 'b']
+#     }
+#     max_clique3 = find_max_clique(graph3)
+#     print("Max clique: ", max_clique3)
 
-    graph5 = {
-        'a': ['b', 'c'],
-        'b': ['a'],
-        'c': ['a']
-    }
-    max_clique5 = find_max_clique(graph5)
-    print("Max clique: ", max_clique5)
+#     graph4 = {
+#         'a': ['b'],
+#         'b': ['a', 'c', 'd'],
+#         'c': ['b', 'd'],
+#         'd': ['b', 'c']
+#     }
+#     max_clique4 = find_max_clique(graph4)
+#     print("Max clique: ", max_clique4)
 
-    # Begin edge case tests
-    print("Edge cases: ")
+#     graph5 = {
+#         'a': ['b', 'c'],
+#         'b': ['a'],
+#         'c': ['a']
+#     }
+#     max_clique5 = find_max_clique(graph5)
+#     print("Max clique: ", max_clique5)
 
-    # Empty Graph
-    graph6 = {}
-    max_clique6 = find_max_clique(graph6)
-    print("Max clique: ", max_clique6)
+#     # Begin edge case tests
+#     print("Edge cases: ")
 
-    # Single Vertex
-    graph7 = {
-        'a': []
-    }
-    max_clique7 = find_max_clique(graph7)
-    print("Max clique: ", max_clique7)
+#     # Empty Graph
+#     graph6 = {}
+#     max_clique6 = find_max_clique(graph6)
+#     print("Max clique: ", max_clique6)
 
-    # Single Edge
-    graph8 = {
-        'a': ['b'],
-        'b': ['a']
-    }
-    max_clique8 = find_max_clique(graph8)
-    print("Max clique: ", max_clique8)
+#     # Single Vertex
+#     graph7 = {
+#         'a': []
+#     }
+#     max_clique7 = find_max_clique(graph7)
+#     print("Max clique: ", max_clique7)
 
-    # Disconnected Graph
-    graph9 = {
-        'a': ['b'],
-        'b': ['a'],
-        'c': [],
-        'd': []
-    }
-    max_clique9 = find_max_clique(graph9)
-    print("Max clique: ", max_clique9)
+#     # Single Edge
+#     graph8 = {
+#         'a': ['b'],
+#         'b': ['a']
+#     }
+#     max_clique8 = find_max_clique(graph8)
+#     print("Max clique: ", max_clique8)
 
-    # Chain of Vertices
-    graph10 = {
-        'a': ['b'],
-        'b': ['a', 'c'],
-        'c': ['b', 'd'],
-        'd': ['c']
-    }
-    max_clique10 = find_max_clique(graph10)
-    print("Max clique: ", max_clique10)
+#     # Disconnected Graph
+#     graph9 = {
+#         'a': ['b'],
+#         'b': ['a'],
+#         'c': [],
+#         'd': []
+#     }
+#     max_clique9 = find_max_clique(graph9)
+#     print("Max clique: ", max_clique9)
 
-    # Triangle
-    graph11 = {
-        'a': ['b', 'c'],
-        'b': ['a', 'c'],
-        'c': ['a', 'b']
-    }
-    max_clique11 = find_max_clique(graph11)
-    print("Max clique: ", max_clique11)
+#     # Chain of Vertices
+#     graph10 = {
+#         'a': ['b'],
+#         'b': ['a', 'c'],
+#         'c': ['b', 'd'],
+#         'd': ['c']
+#     }
+#     max_clique10 = find_max_clique(graph10)
+#     print("Max clique: ", max_clique10)
 
-    # Complete Graph
-    graph12 = {
-        'a': ['b', 'c', 'd'],
-        'b': ['a', 'c', 'd'],
-        'c': ['a', 'b', 'd'],
-        'd': ['a', 'b', 'c']
-    }
-    max_clique12 = find_max_clique(graph12)
-    print("Max clique: ", max_clique12)
+#     # Triangle
+#     graph11 = {
+#         'a': ['b', 'c'],
+#         'b': ['a', 'c'],
+#         'c': ['a', 'b']
+#     }
+#     max_clique11 = find_max_clique(graph11)
+#     print("Max clique: ", max_clique11)
 
-    # Larger Graph with Multiple Cliques
-    graph13 = {
-        'a': ['b', 'c'],
-        'b': ['a', 'c', 'd'],
-        'c': ['a', 'b', 'd'],
-        'd': ['b', 'c'],
-        'e': ['f'],
-        'f': ['e']
-    }
-    # TODO: Should be ABCD? <- I think it should just be abc because d and a aren't connected
-    max_clique13 = find_max_clique(graph13)
-    print("Max clique: ", max_clique13)
+#     # Complete Graph
+#     graph12 = {
+#         'a': ['b', 'c', 'd'],
+#         'b': ['a', 'c', 'd'],
+#         'c': ['a', 'b', 'd'],
+#         'd': ['a', 'b', 'c']
+#     }
+#     max_clique12 = find_max_clique(graph12)
+#     print("Max clique: ", max_clique12)
 
-    # Graph with Isolated Vertices
-    graph14 = {
-        'a': ['b'],
-        'b': ['a'],
-        'c': ['d'],
-        'd': ['c'],
-        'e': []
-    }
-    max_clique14 = find_max_clique(graph14)
-    print("Max clique: ", max_clique14)
+#     # Larger Graph with Multiple Cliques
+#     graph13 = {
+#         'a': ['b', 'c'],
+#         'b': ['a', 'c', 'd'],
+#         'c': ['a', 'b', 'd'],
+#         'd': ['b', 'c'],
+#         'e': ['f'],
+#         'f': ['e']
+#     }
+#     # TODO: Should be ABCD? <- I think it should just be abc because d and a aren't connected
+#     max_clique13 = find_max_clique(graph13)
+#     print("Max clique: ", max_clique13)
 
-    # Complete Bipartite Graph
-    graph15 = {
-        'a': ['b', 'c'],
-        'b': ['a', 'd'],
-        'c': ['a', 'd'],
-        'd': ['b', 'c']
-    }
-    # TODO: Should be ABCD? <- Again, I think it should just be abc because a and d aren't connected, they all have to be connected to each other
-    max_clique15 = find_max_clique(graph15)
-    print("Max clique: ", max_clique15)
+#     # Graph with Isolated Vertices
+#     graph14 = {
+#         'a': ['b'],
+#         'b': ['a'],
+#         'c': ['d'],
+#         'd': ['c'],
+#         'e': []
+#     }
+#     max_clique14 = find_max_clique(graph14)
+#     print("Max clique: ", max_clique14)
 
-    # Fully Connected Subgraphs
-    graph16 = {
-        'a': ['b', 'c', 'd'],
-        'b': ['a', 'c'],
-        'c': ['a', 'b'],
-        'd': ['a']
-    }
-    max_clique16 = find_max_clique(graph16)
-    print("Max clique: ", max_clique16)
+#     # Complete Bipartite Graph
+#     graph15 = {
+#         'a': ['b', 'c'],
+#         'b': ['a', 'd'],
+#         'c': ['a', 'd'],
+#         'd': ['b', 'c']
+#     }
+#     # TODO: Should be ABCD? <- Again, I think it should just be abc because a and d aren't connected, they all have to be connected to each other
+#     max_clique15 = find_max_clique(graph15)
+#     print("Max clique: ", max_clique15)
 
-    # for v, e in graph.items():
-    #     print(f"Vertex: {v}")
-    #     print(f"Edge: {e}")
-    #     print('----')
+#     # Fully Connected Subgraphs
+#     graph16 = {
+#         'a': ['b', 'c', 'd'],
+#         'b': ['a', 'c'],
+#         'c': ['a', 'b'],
+#         'd': ['a']
+#     }
+#     max_clique16 = find_max_clique(graph16)
+#     print("Max clique: ", max_clique16)
+
+#     # for v, e in graph.items():
+#     #     print(f"Vertex: {v}")
+#     #     print(f"Edge: {e}")
+#     #     print('----')
 
 
 if __name__ == "__main__":
