@@ -1,74 +1,65 @@
-# Python3 implementation of the approach
+import sys
+sys.setrecursionlimit(5000)
+
 MAX = 100
 n = 0
 
-# Stores the vertices
+# Global arrays used by maxCliques and is_clique
 store = [0] * MAX
-
-# Graph
-graph = [[0 for i in range(MAX)] for j in range(MAX)]
-
-# Degree of the vertices
+graph = [[0 for _ in range(MAX)] for _ in range(MAX)]
 d = [0] * MAX
-
-# Function to check if the given set of
-# vertices in store array is a clique or not
 
 
 def is_clique(b):
-
-    # Run a loop for all set of edges
     for i in range(1, b):
         for j in range(i + 1, b):
-
-            # If any edge is missing
             if (graph[store[i]][store[j]] == 0):
                 return False
-
     return True
-
-# Function to find all the sizes
-# of maximal cliques
 
 
 def maxCliques(i, l):
-
-    # Maximal clique size
     max_ = 0
-
-    # Check if any vertices from i+1
-    # can be inserted
     for j in range(i + 1, n + 1):
-
-        # Add the vertex to store
         store[l] = j
-
-        # If the graph is not a clique of size k then
-        # it cannot be a clique by adding another edge
         if (is_clique(l + 1)):
-
-            # Update max
             max_ = max(max_, l)
-
-            # Check if another edge can be added
             max_ = max(max_, maxCliques(j, l + 1))
-
     return max_
 
 
-# Driver code
-if __name__ == '__main__':
-    edges = [[1, 2], [2, 3], [3, 1],
-             [4, 3], [4, 1], [4, 2]]
-    size = len(edges)
-    n = 4
+def main():
+    num_edges = input("How any edges are there (list an int): ")
+    edges = []
+    for _ in range(int(num_edges)):
+        edge = input("List an edge (ex. A B): ")
+        edges.append(edge.strip().split())
 
-    for i in range(size):
-        graph[edges[i][0]][edges[i][1]] = 1
-        graph[edges[i][1]][edges[i][0]] = 1
-        d[edges[i][0]] += 1
-        d[edges[i][1]] += 1
+    vertex_map = {}
+    current_id = 1
+    for u, v in edges:
+        if u.upper() not in vertex_map:
+            vertex_map[u.upper()] = current_id
+            current_id += 1
+        if v.upper() not in vertex_map:
+            vertex_map[v.upper()] = current_id
+            current_id += 1
 
-    print(maxCliques(0, 1))
+    global n
+    n = len(vertex_map)
 
-# This code is contributed by PrinciRaj1992
+    for u, v in edges:
+        u_id = vertex_map[u.upper()]
+        v_id = vertex_map[v.upper()]
+        graph[u_id][v_id] = 1
+        graph[v_id][u_id] = 1
+        d[u_id] += 1
+        d[v_id] += 1
+
+    max_clique_size = maxCliques(0, 1)
+
+    print("Max clique size:", max_clique_size)
+
+
+if __name__ == "__main__":
+    main()
