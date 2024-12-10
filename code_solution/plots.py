@@ -77,7 +77,7 @@ def main():
     # Data collection for runtime comparison
     runtimes = {'input_size': [], 'exact_runtime': [], 'approx_runtime': []}
     
-    for num_vertices in range(20, 200, 10):  # Test graph sizes from 10 to 100 vertices, increasing by 10
+    for num_vertices in range(10, 200, 10):  # Test graph sizes from 10 to 100 vertices, increasing by 10
         print(f"Testing with {num_vertices} vertices...")
         exact_time, approx_time = runtime_comparison(num_vertices)  # Measure the times
         runtimes['input_size'].append(num_vertices)
