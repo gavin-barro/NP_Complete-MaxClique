@@ -1,3 +1,8 @@
+import sys
+
+# Set the recursion limit to a higher number
+sys.setrecursionlimit(5000)
+
 # Key: the nodes themselves
 # Value: The nodes' neightbors that are connected with an edge
 Graph = dict[str, list[str]]

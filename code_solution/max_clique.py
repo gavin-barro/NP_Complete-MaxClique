@@ -1,6 +1,11 @@
+import sys
+
 # Key: the nodes themselves
 # Value: The nodes' neightbors that are connected with an edge
 Graph = dict[str, list[str]]
+
+# Set the recursion limit to a higher number
+sys.setrecursionlimit(5000)
 
 
 def is_clique(graph: Graph, vertices: list[str]) -> bool:

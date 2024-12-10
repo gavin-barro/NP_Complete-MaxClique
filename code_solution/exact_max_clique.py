@@ -1,7 +1,6 @@
-import time
 import sys
 
-# Set the recursion limit to a higher number, e.g., 5000
+# Set the recursion limit to a higher number
 sys.setrecursionlimit(5000)
 
 # Key: the nodes themselves
@@ -70,48 +69,18 @@ def generate_graph(edges: list[str]) -> Graph:
 
 def format_graph(clique: list[str]) -> str:
     return " ".join(clique)
-    
-def generate_large_graph(num_vertices: int) -> dict:
-    """Generates a large random graph."""
-    graph = {str(i): [] for i in range(num_vertices)}  # Create vertices labeled 0, 1, 2, ..., num_vertices-1
-    for i in range(num_vertices):
-        for j in range(i + 1, num_vertices):  # Avoid self-loops
-            graph[str(i)].append(str(j))
-            graph[str(j)].append(str(i))
-    return graph
-
-def worst_case_graph() -> None:
-    num_vertices = 1125 
-    start_time = time.time()
-
-    # Generate large graph and find max clique
-    large_graph = generate_large_graph(num_vertices)
-    max_clique = find_max_clique_exact(large_graph)
-    end_time = time.time()
-
-    # Calculate the time
-    elapsed_time = end_time - start_time
-    minutes = int(elapsed_time // 60)
-    seconds = int(elapsed_time % 60)
-
-    print("Max clique:", format_graph(max_clique))
-    print(f"Time taken: {minutes} minutes and {seconds} seconds")
- 
 
 
 def main() -> None:
     # Testing generate graph function
-    # num_edges = input("How any edges are there (list an int): ")
-    # edges = []
-    # for _ in range(int(num_edges)):
-    #     edge = input("List an edge (ex. A B): ")
-    #     edges.append(edge)
-    # example_graph = generate_graph(edges)
-    # max_clique_exact = find_max_clique_exact(example_graph)
-    # print("Max clique: ", format_graph(max_clique_exact))
-
-    # Very large graph that would take a LOT of time to run
-    worst_case_graph()
+    num_edges = input("How any edges are there (list an int): ")
+    edges = []
+    for _ in range(int(num_edges)):
+        edge = input("List an edge (ex. A B): ")
+        edges.append(edge)
+    example_graph = generate_graph(edges)
+    max_clique_exact = find_max_clique_exact(example_graph)
+    print("Max clique: ", format_graph(max_clique_exact))
 
 
 if __name__ == "__main__":
