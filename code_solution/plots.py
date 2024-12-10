@@ -79,7 +79,7 @@ def main():
     runtimes = {'input_size': [], 'exact_runtime': [], 'approx_runtime': []}
     clique_sizes = {'input_size': [], 'exact_clique_size': [], 'approx_clique_size': []}
     
-    for num_vertices in range(100, 500, 10):  # Test graph sizes from 10 to 350 vertices, increasing by 10
+    for num_vertices in range(100, 300, 10):  # Test graph sizes from 100 to 300 vertices, increasing by 10
         print(f"Testing with {num_vertices} vertices...")
         exact_time, approx_time, exact_clique_size, approx_clique_size = runtime_comparison(num_vertices)
         
