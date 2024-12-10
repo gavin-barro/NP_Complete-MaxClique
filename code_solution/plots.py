@@ -47,44 +47,53 @@ def generate_plot_graph(num_vertices: int) -> Graph:
     return graph, edge_count  # Return the graph and the edge count
 
 
-def runtime_comparison(num_vertices: int) -> None:
+def runtime_comparison(num_vertices: int) -> tuple[float, float, int, int]:
     # Generate the graph with num_vertices
     large_graph, edge_count = generate_plot_graph(num_vertices)
-    
+        
     # Measure time for Exact Algorithm
     start_time = time.time()
     exact_max_clique = exact.find_max_clique_exact(large_graph)
     end_time = time.time()
     exact_time = end_time - start_time
-    
+    exact_clique_size = len(exact_max_clique)
+        
     # Measure time for Approximate Algorithm
     start_time = time.time()
     approx_max_clique = approx.find_max_clique_approx(large_graph)
     end_time = time.time()
     approx_time = end_time - start_time
-    
+    approx_clique_size = len(approx_max_clique)
+        
     # Print out results
-    print(f"Exact Max Clique: {exact.format_graph(exact_max_clique)}")
+    print(f"Exact Max Clique: {exact.format_graph(exact_max_clique)} (Size: {exact_clique_size})")
     print(f"Time taken for Exact Algorithm: {exact_time:.6f} seconds")
-    print(f"Approximate Max Clique: {approx.format_graph(approx_max_clique)}")
+    print(f"Approximate Max Clique: {approx.format_graph(approx_max_clique)} (Size: {approx_clique_size})")
     print(f"Time taken for Approximate Algorithm: {approx_time:.6f} seconds")
     print(f"Total number of edges: {edge_count}")
 
-    return exact_time, approx_time  # Return times for later plotting
-
+    return exact_time, approx_time, exact_clique_size, approx_clique_size
 
 def main():
-    # Data collection for runtime comparison
+    # Data collection for runtime and clique size comparison
     runtimes = {'input_size': [], 'exact_runtime': [], 'approx_runtime': []}
+    clique_sizes = {'input_size': [], 'exact_clique_size': [], 'approx_clique_size': []}
     
-    for num_vertices in range(10, 200, 10):  # Test graph sizes from 10 to 100 vertices, increasing by 10
+    for num_vertices in range(100, 500, 10):  # Test graph sizes from 10 to 350 vertices, increasing by 10
         print(f"Testing with {num_vertices} vertices...")
-        exact_time, approx_time = runtime_comparison(num_vertices)  # Measure the times
+        exact_time, approx_time, exact_clique_size, approx_clique_size = runtime_comparison(num_vertices)
+        
+        # Collect runtime data
         runtimes['input_size'].append(num_vertices)
         runtimes['exact_runtime'].append(exact_time)
         runtimes['approx_runtime'].append(approx_time)
+        
+        # Collect clique size data
+        clique_sizes['input_size'].append(num_vertices)
+        clique_sizes['exact_clique_size'].append(exact_clique_size)
+        clique_sizes['approx_clique_size'].append(approx_clique_size)
     
-    # Plot the runtime comparison
+    # Plot runtime comparison
     plt.figure(figsize=(10, 6))
     plt.plot(runtimes['input_size'], runtimes['exact_runtime'], label='Exact Algorithm', color='blue', marker='o')
     plt.plot(runtimes['input_size'], runtimes['approx_runtime'], label='Approximate Algorithm', color='red', marker='x')
@@ -94,6 +103,17 @@ def main():
     plt.legend()
     plt.grid(True)
     plt.show()
-    
+
+    # Plot clique size comparison
+    plt.figure(figsize=(10, 6))
+    plt.plot(clique_sizes['input_size'], clique_sizes['exact_clique_size'], label='Exact Algorithm', color='blue', marker='o')
+    plt.plot(clique_sizes['input_size'], clique_sizes['approx_clique_size'], label='Approximate Algorithm', color='red', marker='x')
+    plt.xlabel('Number of Vertices')
+    plt.ylabel('Clique Size')
+    plt.title('Clique Size Comparison: Exact vs Approximate Algorithms')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
 if __name__ == '__main__':
     main()
