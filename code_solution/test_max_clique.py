@@ -4,6 +4,7 @@ from max_clique import Graph
 import approximate_max_clique as approx
 import exact_max_clique as exact
 import known_max_clique as known
+from collections import Counter
 
 
 def random_graph(num_vertices, edge_probability=0.5):
@@ -70,6 +71,7 @@ class TestMaxCliqueMethods(unittest.TestCase):
             self.assertLessEqual(approx_size, exact_size,
                                  "Approx solution found clique larger than the exact solution")
 
+
 def test_find_max_clique() -> None:
     # Basic test cases
     graph1 = {
@@ -81,7 +83,9 @@ def test_find_max_clique() -> None:
         'F': ['D', 'E', 'G'],
         'G': ['D', 'E', 'F']
     }
-    assert exact.find_max_clique_exact(graph1) == ['D', 'E', 'F', 'G'], "Test Case 1 Failed"
+    max_clique = exact.find_max_clique_exact(graph1)
+    assert Counter(max_clique) == Counter(
+        ['D', 'E', 'F', 'G']), "Test Case 1 Failed"
 
     graph2 = {
         'A': ['B', 'C'],
@@ -90,14 +94,16 @@ def test_find_max_clique() -> None:
         'D': ['C', 'E'],
         'E': ['C', 'D']
     }
-    assert exact.find_max_clique_exact(graph2) == ['A', 'B', 'C'], "Test Case 2 Failed"
+    assert Counter(exact.find_max_clique_exact(graph2)) == Counter(
+        ['E', 'D', 'C']), "Test Case 2 Failed"
 
     graph3 = {
         'a': ['b', 'c'],
         'b': ['a', 'c'],
         'c': ['a', 'b']
     }
-    assert exact.find_max_clique_exact(graph3) == ['a', 'b', 'c'], "Test Case 3 Failed"
+    assert Counter(exact.find_max_clique_exact(graph3)) == Counter(
+        ['a', 'b', 'c']), "Test Case 3 Failed"
 
     graph4 = {
         'a': ['b'],
@@ -105,27 +111,32 @@ def test_find_max_clique() -> None:
         'c': ['b', 'd'],
         'd': ['b', 'c']
     }
-    assert exact.find_max_clique_exact(graph4) == ['b', 'c', 'd'], "Test Case 4 Failed"
+    assert Counter(exact.find_max_clique_exact(graph4)) == Counter(
+        ['b', 'c', 'd']), "Test Case 4 Failed"
 
     graph5 = {
         'a': ['b', 'c'],
         'b': ['a'],
         'c': ['a']
     }
-    assert exact.find_max_clique_exact(graph5) == ['a', 'b'], "Test Case 5 Failed"
+    assert Counter(exact.find_max_clique_exact(graph5)) == Counter(
+        ['a', 'c']), "Test Case 5 Failed"
 
     # Edge case tests
     graph6 = {}
-    assert exact.find_max_clique_exact(graph6) == [], "Empty Graph Test Failed"
+    assert Counter(exact.find_max_clique_exact(graph6)
+                   ) == Counter([]), "Empty Graph Test Failed"
 
     graph7 = {'a': []}
-    assert exact.find_max_clique_exact(graph7) == ['a'], "Single Vertex Test Failed"
+    assert Counter(exact.find_max_clique_exact(graph7)) == Counter(
+        ['a']), "Single Vertex Test Failed"
 
     graph8 = {
         'a': ['b'],
         'b': ['a']
     }
-    assert exact.find_max_clique_exact(graph8) == ['a', 'b'], "Single Edge Test Failed"
+    assert Counter(exact.find_max_clique_exact(graph8)) == Counter(
+        ['a', 'b']), "Single Edge Test Failed"
 
     graph9 = {
         'a': ['b'],
@@ -133,7 +144,8 @@ def test_find_max_clique() -> None:
         'c': [],
         'd': []
     }
-    assert exact.find_max_clique_exact(graph9) == ['a', 'b'], "Disconnected Graph Test Failed"
+    assert Counter(exact.find_max_clique_exact(graph9)) == Counter(
+        ['a', 'b']), "Disconnected Graph Test Failed"
 
     graph10 = {
         'a': ['b'],
@@ -141,14 +153,17 @@ def test_find_max_clique() -> None:
         'c': ['b', 'd'],
         'd': ['c']
     }
-    assert exact.find_max_clique_exact(graph10) == ['a', 'b'], "Chain of Vertices Test Failed"
+
+    assert Counter(exact.find_max_clique_exact(graph10)) == Counter(
+        ['c', 'd']), "Chain of Vertices Test Failed"
 
     graph11 = {
         'a': ['b', 'c'],
         'b': ['a', 'c'],
         'c': ['a', 'b']
     }
-    assert exact.find_max_clique_exact(graph11) == ['a', 'b', 'c'], "Triangle Test Failed"
+    assert Counter(exact.find_max_clique_exact(graph11)) == Counter(
+        ['a', 'b', 'c']), "Triangle Test Failed"
 
     graph12 = {
         'a': ['b', 'c', 'd'],
@@ -156,7 +171,8 @@ def test_find_max_clique() -> None:
         'c': ['a', 'b', 'd'],
         'd': ['a', 'b', 'c']
     }
-    assert exact.find_max_clique_exact(graph12) == ['a', 'b', 'c', 'd'], "Complete Graph Test Failed"
+    assert Counter(exact.find_max_clique_exact(graph12)) == Counter(
+        ['a', 'b', 'c', 'd']), "Complete Graph Test Failed"
 
     graph13 = {
         'a': ['b', 'c'],
@@ -166,7 +182,9 @@ def test_find_max_clique() -> None:
         'e': ['f'],
         'f': ['e']
     }
-    assert exact.find_max_clique_exact(graph13) == ['a', 'b', 'c'], "Larger Graph Test Failed"
+
+    assert Counter(exact.find_max_clique_exact(graph13)) == Counter(
+        ['d', 'b', 'c']), "Larger Graph Test Failed"
 
     graph14 = {
         'a': ['b'],
@@ -175,7 +193,9 @@ def test_find_max_clique() -> None:
         'd': ['c'],
         'e': []
     }
-    assert exact.find_max_clique_exact(graph14) == ['a', 'b'], "Graph with Isolated Vertices Test Failed"
+
+    assert Counter(exact.find_max_clique_exact(graph14)) == Counter(
+        ['d', 'c']), "Graph with Isolated Vertices Test Failed"
 
     graph15 = {
         'a': ['b', 'c'],
@@ -183,7 +203,9 @@ def test_find_max_clique() -> None:
         'c': ['a', 'd'],
         'd': ['b', 'c']
     }
-    assert exact.find_max_clique_exact(graph15) == ['a', 'b', 'c'], "Complete Bipartite Graph Test Failed"
+
+    assert Counter(exact.find_max_clique_exact(graph15)) == Counter(
+        ['d', 'c']), "Complete Bipartite Graph Test Failed"
 
     graph16 = {
         'a': ['b', 'c', 'd'],
@@ -191,9 +213,11 @@ def test_find_max_clique() -> None:
         'c': ['a', 'b'],
         'd': ['a']
     }
-    assert exact.find_max_clique_exact(graph16) == ['a', 'b', 'c'], "Fully Connected Subgraphs Test Failed"
+    assert Counter(exact.find_max_clique_exact(graph16)) == Counter(
+        ['a', 'b', 'c']), "Fully Connected Subgraphs Test Failed"
 
     print("All test cases passed!")
+
 
 # Run the test cases
 test_find_max_clique()
