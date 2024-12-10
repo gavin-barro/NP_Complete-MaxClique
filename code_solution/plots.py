@@ -47,7 +47,7 @@ def generate_plot_graph(num_vertices: int) -> Graph:
     return graph, edge_count  # Return the graph and the edge count
 
 
-def plot_graph(num_vertices: int) -> None:
+def runtime_comparison(num_vertices: int) -> None:
     # Generate the graph with num_vertices
     large_graph, edge_count = generate_plot_graph(num_vertices)
     
@@ -77,9 +77,9 @@ def main():
     # Data collection for runtime comparison
     runtimes = {'input_size': [], 'exact_runtime': [], 'approx_runtime': []}
     
-    for num_vertices in range(100, 1000, 100):  # Test graph sizes from 10 to 100 vertices, increasing by 10
+    for num_vertices in range(20, 200, 10):  # Test graph sizes from 10 to 100 vertices, increasing by 10
         print(f"Testing with {num_vertices} vertices...")
-        exact_time, approx_time = plot_graph(num_vertices)  # Measure the times
+        exact_time, approx_time = runtime_comparison(num_vertices)  # Measure the times
         runtimes['input_size'].append(num_vertices)
         runtimes['exact_runtime'].append(exact_time)
         runtimes['approx_runtime'].append(approx_time)
