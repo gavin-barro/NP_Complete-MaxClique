@@ -53,20 +53,20 @@ def runtime_comparison(num_vertices: int) -> None:
     
     # Measure time for Exact Algorithm
     start_time = time.time()
-    max_clique = exact.find_max_clique_exact(large_graph)
+    exact_max_clique = exact.find_max_clique_exact(large_graph)
     end_time = time.time()
     exact_time = end_time - start_time
     
     # Measure time for Approximate Algorithm
     start_time = time.time()
-    max_clique = approx.find_max_clique_approx(large_graph)
+    approx_max_clique = approx.find_max_clique_approx(large_graph)
     end_time = time.time()
     approx_time = end_time - start_time
     
     # Print out results
-    print(f"Exact Max Clique: {exact.format_graph(max_clique)}")
+    print(f"Exact Max Clique: {exact.format_graph(exact_max_clique)}")
     print(f"Time taken for Exact Algorithm: {exact_time:.6f} seconds")
-    print(f"Approximate Max Clique: {approx.format_graph(max_clique)}")
+    print(f"Approximate Max Clique: {approx.format_graph(approx_max_clique)}")
     print(f"Time taken for Approximate Algorithm: {approx_time:.6f} seconds")
     print(f"Total number of edges: {edge_count}")
 
