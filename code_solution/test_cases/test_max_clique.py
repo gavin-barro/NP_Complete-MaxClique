@@ -15,7 +15,6 @@ def random_graph(num_vertices, edge_probability=0.5):
                 edges.append(vertices[i] + " " + vertices[j])
     return edges
 
-
 class TestMaxCliqueMethods(unittest.TestCase):
 
     def test_random_graphs(self):
@@ -71,155 +70,152 @@ class TestMaxCliqueMethods(unittest.TestCase):
                                  "Approx solution found clique larger than the exact solution")
 
 
-def test_find_max_clique() -> None:
-    # Basic test cases
-    graph1 = {
-        'A': ['B', 'C'],
-        'B': ['A', 'C', 'F'],
-        'C': ['A', 'B', 'G'],
-        'D': ['E', 'F', 'G'],
-        'E': ['D', 'F', 'G'],
-        'F': ['D', 'E', 'G'],
-        'G': ['D', 'E', 'F']
-    }
-    max_clique = exact.find_max_clique_exact(graph1)
-    assert Counter(max_clique) == Counter(
-        ['D', 'E', 'F', 'G']), "Test Case 1 Failed"
+    def test_find_max_clique(self) -> None:
+        # Basic test cases
+        graph1 = {
+            'A': ['B', 'C'],
+            'B': ['A', 'C', 'F'],
+            'C': ['A', 'B', 'G'],
+            'D': ['E', 'F', 'G'],
+            'E': ['D', 'F', 'G'],
+            'F': ['D', 'E', 'G'],
+            'G': ['D', 'E', 'F']
+        }
+        max_clique = exact.find_max_clique_exact(graph1)
+        assert Counter(max_clique) == Counter(
+            ['D', 'E', 'F', 'G']), "Test Case 1 Failed"
 
-    graph2 = {
-        'A': ['B', 'C'],
-        'B': ['A', 'C'],
-        'C': ['A', 'B', 'D', 'E'],
-        'D': ['C', 'E'],
-        'E': ['C', 'D']
-    }
-    assert Counter(exact.find_max_clique_exact(graph2)) == Counter(
-        ['E', 'D', 'C']), "Test Case 2 Failed"
+        graph2 = {
+            'A': ['B', 'C'],
+            'B': ['A', 'C'],
+            'C': ['A', 'B', 'D', 'E'],
+            'D': ['C', 'E'],
+            'E': ['C', 'D']
+        }
+        assert Counter(exact.find_max_clique_exact(graph2)) == Counter(
+            ['E', 'D', 'C']), "Test Case 2 Failed"
 
-    graph3 = {
-        'a': ['b', 'c'],
-        'b': ['a', 'c'],
-        'c': ['a', 'b']
-    }
-    assert Counter(exact.find_max_clique_exact(graph3)) == Counter(
-        ['a', 'b', 'c']), "Test Case 3 Failed"
+        graph3 = {
+            'a': ['b', 'c'],
+            'b': ['a', 'c'],
+            'c': ['a', 'b']
+        }
+        assert Counter(exact.find_max_clique_exact(graph3)) == Counter(
+            ['a', 'b', 'c']), "Test Case 3 Failed"
 
-    graph4 = {
-        'a': ['b'],
-        'b': ['a', 'c', 'd'],
-        'c': ['b', 'd'],
-        'd': ['b', 'c']
-    }
-    assert Counter(exact.find_max_clique_exact(graph4)) == Counter(
-        ['b', 'c', 'd']), "Test Case 4 Failed"
+        graph4 = {
+            'a': ['b'],
+            'b': ['a', 'c', 'd'],
+            'c': ['b', 'd'],
+            'd': ['b', 'c']
+        }
+        assert Counter(exact.find_max_clique_exact(graph4)) == Counter(
+            ['b', 'c', 'd']), "Test Case 4 Failed"
 
-    graph5 = {
-        'a': ['b', 'c'],
-        'b': ['a'],
-        'c': ['a']
-    }
-    assert Counter(exact.find_max_clique_exact(graph5)) == Counter(
-        ['a', 'c']), "Test Case 5 Failed"
+        graph5 = {
+            'a': ['b', 'c'],
+            'b': ['a'],
+            'c': ['a']
+        }
+        assert Counter(exact.find_max_clique_exact(graph5)) == Counter(
+            ['a', 'c']), "Test Case 5 Failed"
 
-    # Edge case tests
-    graph6 = {}
-    assert Counter(exact.find_max_clique_exact(graph6)
-                   ) == Counter([]), "Empty Graph Test Failed"
+        # Edge case tests
+        graph6 = {}
+        assert Counter(exact.find_max_clique_exact(graph6)
+                       ) == Counter([]), "Empty Graph Test Failed"
 
-    graph7 = {'a': []}
-    assert Counter(exact.find_max_clique_exact(graph7)) == Counter(
-        ['a']), "Single Vertex Test Failed"
+        graph7 = {'a': []}
+        assert Counter(exact.find_max_clique_exact(graph7)) == Counter(
+            ['a']), "Single Vertex Test Failed"
 
-    graph8 = {
-        'a': ['b'],
-        'b': ['a']
-    }
-    assert Counter(exact.find_max_clique_exact(graph8)) == Counter(
-        ['a', 'b']), "Single Edge Test Failed"
+        graph8 = {
+            'a': ['b'],
+            'b': ['a']
+        }
+        assert Counter(exact.find_max_clique_exact(graph8)) == Counter(
+            ['a', 'b']), "Single Edge Test Failed"
 
-    graph9 = {
-        'a': ['b'],
-        'b': ['a'],
-        'c': [],
-        'd': []
-    }
-    assert Counter(exact.find_max_clique_exact(graph9)) == Counter(
-        ['a', 'b']), "Disconnected Graph Test Failed"
+        graph9 = {
+            'a': ['b'],
+            'b': ['a'],
+            'c': [],
+            'd': []
+        }
+        assert Counter(exact.find_max_clique_exact(graph9)) == Counter(
+            ['a', 'b']), "Disconnected Graph Test Failed"
 
-    graph10 = {
-        'a': ['b'],
-        'b': ['a', 'c'],
-        'c': ['b', 'd'],
-        'd': ['c']
-    }
+        graph10 = {
+            'a': ['b'],
+            'b': ['a', 'c'],
+            'c': ['b', 'd'],
+            'd': ['c']
+        }
 
-    assert Counter(exact.find_max_clique_exact(graph10)) == Counter(
-        ['c', 'd']), "Chain of Vertices Test Failed"
+        assert Counter(exact.find_max_clique_exact(graph10)) == Counter(
+            ['c', 'd']), "Chain of Vertices Test Failed"
 
-    graph11 = {
-        'a': ['b', 'c'],
-        'b': ['a', 'c'],
-        'c': ['a', 'b']
-    }
-    assert Counter(exact.find_max_clique_exact(graph11)) == Counter(
-        ['a', 'b', 'c']), "Triangle Test Failed"
+        graph11 = {
+            'a': ['b', 'c'],
+            'b': ['a', 'c'],
+            'c': ['a', 'b']
+        }
+        assert Counter(exact.find_max_clique_exact(graph11)) == Counter(
+            ['a', 'b', 'c']), "Triangle Test Failed"
 
-    graph12 = {
-        'a': ['b', 'c', 'd'],
-        'b': ['a', 'c', 'd'],
-        'c': ['a', 'b', 'd'],
-        'd': ['a', 'b', 'c']
-    }
-    assert Counter(exact.find_max_clique_exact(graph12)) == Counter(
-        ['a', 'b', 'c', 'd']), "Complete Graph Test Failed"
+        graph12 = {
+            'a': ['b', 'c', 'd'],
+            'b': ['a', 'c', 'd'],
+            'c': ['a', 'b', 'd'],
+            'd': ['a', 'b', 'c']
+        }
+        assert Counter(exact.find_max_clique_exact(graph12)) == Counter(
+            ['a', 'b', 'c', 'd']), "Complete Graph Test Failed"
 
-    graph13 = {
-        'a': ['b', 'c'],
-        'b': ['a', 'c', 'd'],
-        'c': ['a', 'b', 'd'],
-        'd': ['b', 'c'],
-        'e': ['f'],
-        'f': ['e']
-    }
+        graph13 = {
+            'a': ['b', 'c'],
+            'b': ['a', 'c', 'd'],
+            'c': ['a', 'b', 'd'],
+            'd': ['b', 'c'],
+            'e': ['f'],
+            'f': ['e']
+        }
 
-    assert Counter(exact.find_max_clique_exact(graph13)) == Counter(
-        ['d', 'b', 'c']), "Larger Graph Test Failed"
+        assert Counter(exact.find_max_clique_exact(graph13)) == Counter(
+            ['d', 'b', 'c']), "Larger Graph Test Failed"
 
-    graph14 = {
-        'a': ['b'],
-        'b': ['a'],
-        'c': ['d'],
-        'd': ['c'],
-        'e': []
-    }
+        graph14 = {
+            'a': ['b'],
+            'b': ['a'],
+            'c': ['d'],
+            'd': ['c'],
+            'e': []
+        }
 
-    assert Counter(exact.find_max_clique_exact(graph14)) == Counter(
-        ['d', 'c']), "Graph with Isolated Vertices Test Failed"
+        assert Counter(exact.find_max_clique_exact(graph14)) == Counter(
+            ['d', 'c']), "Graph with Isolated Vertices Test Failed"
 
-    graph15 = {
-        'a': ['b', 'c'],
-        'b': ['a', 'd'],
-        'c': ['a', 'd'],
-        'd': ['b', 'c']
-    }
+        graph15 = {
+            'a': ['b', 'c'],
+            'b': ['a', 'd'],
+            'c': ['a', 'd'],
+            'd': ['b', 'c']
+        }
 
-    assert Counter(exact.find_max_clique_exact(graph15)) == Counter(
-        ['d', 'c']), "Complete Bipartite Graph Test Failed"
+        assert Counter(exact.find_max_clique_exact(graph15)) == Counter(
+            ['d', 'c']), "Complete Bipartite Graph Test Failed"
 
-    graph16 = {
-        'a': ['b', 'c', 'd'],
-        'b': ['a', 'c'],
-        'c': ['a', 'b'],
-        'd': ['a']
-    }
-    assert Counter(exact.find_max_clique_exact(graph16)) == Counter(
-        ['a', 'b', 'c']), "Fully Connected Subgraphs Test Failed"
+        graph16 = {
+            'a': ['b', 'c', 'd'],
+            'b': ['a', 'c'],
+            'c': ['a', 'b'],
+            'd': ['a']
+        }
+        assert Counter(exact.find_max_clique_exact(graph16)) == Counter(
+            ['a', 'b', 'c']), "Fully Connected Subgraphs Test Failed"
 
-    print("All test cases passed!")
+        # print("All test cases passed!")
 
-
-# Run the test cases
-test_find_max_clique()
 
 
 if __name__ == '__main__':
