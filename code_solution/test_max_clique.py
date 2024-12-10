@@ -1,6 +1,5 @@
 import unittest
 import random
-from max_clique import Graph
 import approximate_max_clique as approx
 import exact_max_clique as exact
 import known_max_clique as known
