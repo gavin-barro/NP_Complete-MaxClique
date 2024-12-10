@@ -80,7 +80,7 @@ def generate_large_graph(num_vertices: int) -> dict:
             graph[str(j)].append(str(i))
     return graph
 
-def temp_tests_large_graph() -> None:
+def worst_case_graph() -> None:
     num_vertices = 1125 
     start_time = time.time()
 
@@ -111,7 +111,7 @@ def main() -> None:
     # print("Max clique: ", format_graph(max_clique_exact))
 
     # Very large graph that would take a LOT of time to run
-    temp_tests_large_graph()
+    worst_case_graph()
 
 
 if __name__ == "__main__":
