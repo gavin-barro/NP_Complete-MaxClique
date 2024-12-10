@@ -1,5 +1,8 @@
-import random
 import time
+import sys
+
+# Set the recursion limit to a higher number, e.g., 5000
+sys.setrecursionlimit(5000)
 
 # Key: the nodes themselves
 # Value: The nodes' neightbors that are connected with an edge
@@ -68,23 +71,21 @@ def generate_graph(edges: list[str]) -> Graph:
 def format_graph(clique: list[str]) -> str:
     return " ".join(clique)
     
-def generate_large_graph(num_vertices: int, edge_probability: float) -> dict:
+def generate_large_graph(num_vertices: int) -> dict:
     """Generates a large random graph."""
     graph = {str(i): [] for i in range(num_vertices)}  # Create vertices labeled 0, 1, 2, ..., num_vertices-1
     for i in range(num_vertices):
         for j in range(i + 1, num_vertices):  # Avoid self-loops
-            if random.random() < edge_probability:  # Randomly add an edge based on edge_probability
-                graph[str(i)].append(str(j))
-                graph[str(j)].append(str(i))
+            graph[str(i)].append(str(j))
+            graph[str(j)].append(str(i))
     return graph
 
 def temp_tests_large_graph() -> None:
-    num_vertices = 750  
-    edge_probability = 0.8  
+    num_vertices = 1125 
     start_time = time.time()
 
     # Generate large graph and find max clique
-    large_graph = generate_large_graph(num_vertices, edge_probability)
+    large_graph = generate_large_graph(num_vertices)
     max_clique = find_max_clique_exact(large_graph)
     end_time = time.time()
 
@@ -106,11 +107,8 @@ def main() -> None:
     #     edge = input("List an edge (ex. A B): ")
     #     edges.append(edge)
     # example_graph = generate_graph(edges)
-    # max_clique_ex = find_max_clique_exact(example_graph)
-    # print("Max clique: ", format_graph(max_clique_ex))
-
-    # Temporary but basic edge cases
-    # temp_tests()
+    # max_clique_exact = find_max_clique_exact(example_graph)
+    # print("Max clique: ", format_graph(max_clique_exact))
 
     # Very large graph that would take a LOT of time to run
     temp_tests_large_graph()
