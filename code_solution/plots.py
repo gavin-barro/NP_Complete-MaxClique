@@ -63,7 +63,7 @@ def plot_graph(num_vertices: int) -> None:
     end_time = time.time()
     approx_time = end_time - start_time
     
-    # Print out results (you can adjust this to collect data for later analysis)
+    # Print out results
     print(f"Exact Max Clique: {exact.format_graph(max_clique)}")
     print(f"Time taken for Exact Algorithm: {exact_time:.6f} seconds")
     print(f"Approximate Max Clique: {approx.format_graph(max_clique)}")
