@@ -4,18 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a807b988-b85e-45b2-b3c0-8be1d9d0053e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/code_solution/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/code_solution/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_solution/max_clique.py" beforeDir="false" afterPath="$PROJECT_DIR$/code_solution/max_clique.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_solution/plots.py" beforeDir="false" afterPath="$PROJECT_DIR$/code_solution/plots.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_solution/run_test_cases.sh" beforeDir="false" afterPath="$PROJECT_DIR$/code_solution/run_test_cases.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_solution/test_cases/test_max_clique.py" beforeDir="false" afterPath="$PROJECT_DIR$/code_solution/test_cases/test_max_clique.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_solution/test_max_clique.py" beforeDir="false" afterPath="$PROJECT_DIR$/code_solution/test_max_clique.py" afterDir="false" />
-    </list>
+    <list default="true" id="a807b988-b85e-45b2-b3c0-8be1d9d0053e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
