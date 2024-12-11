@@ -1,8 +1,8 @@
 import unittest
 import random
-import approximate_max_clique as approx
-import exact_max_clique as exact
-import known_max_clique as known
+from code_solution import approximate_max_clique as approx
+from code_solution import exact_max_clique as exact
+from code_solution import known_max_clique as known
 from collections import Counter
 
 

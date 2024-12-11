@@ -2,7 +2,7 @@ import sys
 import exact_max_clique as exact
 
 # Key: the nodes themselves
-# Value: The nodes' neightbors that are connected with an edge
+# Value: The nodes' neighbors that are connected with an edge
 Graph = dict[str, list[str]]
 
 # Set the recursion limit to a higher number
@@ -22,8 +22,8 @@ def find_max_clique(graph: Graph) -> list[str]:
     biggest_clique = []  # keeps track of biggest clique so far
     # sorts from highest to smallest in terms of vertices
     vertices = sorted(graph.keys(), key=lambda v: len(graph[v]), reverse=True)
-    for vertex in vertices:  # loops thorugh the vertices
-        neighbors = graph[vertex]  # gets the neighobrs of each vertex
+    for vertex in vertices:  # loops through the vertices
+        neighbors = graph[vertex]  # gets the neighbors of each vertex
         # makes a kind of graph with the vertex and it's neighbors
         maybe_clique = [vertex] + neighbors
         # calls is_clique with that graph to see if that kind of graph is a clique

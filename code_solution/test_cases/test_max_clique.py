@@ -1,8 +1,8 @@
 import unittest
 import random
-from code_solution import approximate_max_clique as approx
-from code_solution import exact_max_clique as exact
-from code_solution import known_max_clique as known
+import approximate_max_clique as approx
+import exact_max_clique as exact
+import known_max_clique as known
 from collections import Counter
 
 
@@ -17,7 +17,7 @@ def random_graph(num_vertices, edge_probability=0.5):
 
 class TestMaxCliqueMethods(unittest.TestCase):
 
-    def test_random_graphs(self):
+   def test_random_graphs(self) -> None:
         # run this test multiple times to check different graphs
         random.seed(42)
 
@@ -70,7 +70,7 @@ class TestMaxCliqueMethods(unittest.TestCase):
                                  "Approx solution found clique larger than the exact solution")
 
 
-    def test_find_max_clique(self) -> None:
+   def test_find_max_clique_basic(self) -> None:
         # Basic test cases
         graph1 = {
             'A': ['B', 'C'],
@@ -120,6 +120,7 @@ class TestMaxCliqueMethods(unittest.TestCase):
         assert Counter(exact.find_max_clique_exact(graph5)) == Counter(
             ['a', 'c']), "Test Case 5 Failed"
 
+   def edge_case_tests() -> None:
         # Edge case tests
         graph6 = {}
         assert Counter(exact.find_max_clique_exact(graph6)
@@ -213,10 +214,6 @@ class TestMaxCliqueMethods(unittest.TestCase):
         }
         assert Counter(exact.find_max_clique_exact(graph16)) == Counter(
             ['a', 'b', 'c']), "Fully Connected Subgraphs Test Failed"
-
-        # print("All test cases passed!")
-
-
 
 if __name__ == '__main__':
     unittest.main()

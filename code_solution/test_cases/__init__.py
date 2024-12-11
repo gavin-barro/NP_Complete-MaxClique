@@ -1,0 +1,3 @@
+from code_solution import approximate_max_clique
+from code_solution import known_max_clique
+from code_solution import exact_max_clique

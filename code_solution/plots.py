@@ -35,7 +35,7 @@ def worst_case_graph() -> None:
     print(f"Time taken: {minutes} minutes and {seconds} seconds")
     
 
-def generate_plot_graph(num_vertices: int) -> Graph:
+def generate_plot_graph(num_vertices: int) -> tuple[dict[str, list], int]:
     graph = {str(i): [] for i in range(num_vertices)}  # Create vertices labeled 0, 1, 2, ..., num_vertices-1
     edge_count = 0  # Initialize edge counter
     for i in range(num_vertices):
@@ -74,7 +74,7 @@ def runtime_comparison(num_vertices: int) -> tuple[float, float, int, int]:
 
     return exact_time, approx_time, exact_clique_size, approx_clique_size
 
-def main():
+def main() -> None:
     # Data collection for runtime and clique size comparison
     runtimes = {'input_size': [], 'exact_runtime': [], 'approx_runtime': []}
     clique_sizes = {'input_size': [], 'exact_clique_size': [], 'approx_clique_size': []}
@@ -95,8 +95,10 @@ def main():
     
     # Plot runtime comparison
     plt.figure(figsize=(10, 6))
-    plt.plot(runtimes['input_size'], runtimes['exact_runtime'], label='Exact Algorithm', color='blue', marker='o')
-    plt.plot(runtimes['input_size'], runtimes['approx_runtime'], label='Approximate Algorithm', color='red', marker='x')
+    plt.plot(runtimes['input_size'], runtimes['exact_runtime'], label='Exact Algorithm', color='blue',
+             marker='o')
+    plt.plot(runtimes['input_size'], runtimes['approx_runtime'], label='Approximate Algorithm', color='red',
+             marker='x')
     plt.xlabel('Number of Vertices')
     plt.ylabel('Time (Seconds)')
     plt.title('Runtime Comparison: Exact vs Approximate Algorithms')
@@ -106,8 +108,10 @@ def main():
 
     # Plot clique size comparison
     plt.figure(figsize=(10, 6))
-    plt.plot(clique_sizes['input_size'], clique_sizes['exact_clique_size'], label='Exact Algorithm', color='blue', marker='o')
-    plt.plot(clique_sizes['input_size'], clique_sizes['approx_clique_size'], label='Approximate Algorithm', color='red', marker='x')
+    plt.plot(clique_sizes['input_size'], clique_sizes['exact_clique_size'], label='Exact Algorithm',
+             color='blue', marker='o')
+    plt.plot(clique_sizes['input_size'], clique_sizes['approx_clique_size'], label='Approximate Algorithm',
+             color='red', marker='x')
     plt.xlabel('Number of Vertices')
     plt.ylabel('Clique Size')
     plt.title('Clique Size Comparison: Exact vs Approximate Algorithms')
