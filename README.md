@@ -17,8 +17,13 @@ To create and run the worst case graph:
     - chmod +x run_worst_case.sh
     - ./run_worst_case.sh
 
+To run and generate our plots:
+- Run the following commands:
+    - cd code_solution
+    - python3 plots.py 
+
 ## Notes About Our Testing And Output
-- Because our large graph data is randomly generated (with an edge probability of 0.5 indicating a moderate density, which could be changed based on needs), we used a known_max_clique algorithm (slightly modified to fit our needs) which is linked below
+- Because our large graph data for the plots is randomly generated (with an edge probability of 0.5 indicating a moderate density, which could be changed based on needs), we used a known_max_clique algorithm (slightly modified to fit our needs) which is linked below in the Acknowledgements section
     - This returned just the size of the max_clique, not the actual max clique itself
     - Which is what we designed
 - We used this to compare our output with the expected, as these random graphs were extremely large and would take an excruiatingly long time to draw by hand, and there could be multiple max_cliques of the same size
