@@ -6,7 +6,7 @@ import known_max_clique as known
 from collections import Counter
 
 
-def random_graph(num_vertices, edge_probability=0.5):
+def random_graph(num_vertices: int, edge_probability: float = 0.5) -> list:
     vertices = [chr(ord('A') + i) for i in range(num_vertices)]
     edges = []
     for i in range(num_vertices):
@@ -17,7 +17,7 @@ def random_graph(num_vertices, edge_probability=0.5):
 
 class TestMaxCliqueMethods(unittest.TestCase):
 
-   def test_random_graphs(self) -> None:
+    def test_random_graphs(self) -> None:
         # run this test multiple times to check different graphs
         random.seed(42)
 
@@ -69,8 +69,7 @@ class TestMaxCliqueMethods(unittest.TestCase):
             self.assertLessEqual(approx_size, exact_size,
                                  "Approx solution found clique larger than the exact solution")
 
-
-   def test_find_max_clique_basic(self) -> None:
+    def test_find_max_clique_basic(self) -> None:
         # Basic test cases
         graph1 = {
             'A': ['B', 'C'],
@@ -82,8 +81,7 @@ class TestMaxCliqueMethods(unittest.TestCase):
             'G': ['D', 'E', 'F']
         }
         max_clique = exact.find_max_clique_exact(graph1)
-        assert Counter(max_clique) == Counter(
-            ['D', 'E', 'F', 'G']), "Test Case 1 Failed"
+        self.assertEqual(Counter(max_clique), Counter(['D', 'E', 'F', 'G']), "Test Case 1 Failed")
 
         graph2 = {
             'A': ['B', 'C'],
@@ -92,16 +90,14 @@ class TestMaxCliqueMethods(unittest.TestCase):
             'D': ['C', 'E'],
             'E': ['C', 'D']
         }
-        assert Counter(exact.find_max_clique_exact(graph2)) == Counter(
-            ['E', 'D', 'C']), "Test Case 2 Failed"
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph2)), Counter(['E', 'D', 'C']), "Test Case 2 Failed")
 
         graph3 = {
             'a': ['b', 'c'],
             'b': ['a', 'c'],
             'c': ['a', 'b']
         }
-        assert Counter(exact.find_max_clique_exact(graph3)) == Counter(
-            ['a', 'b', 'c']), "Test Case 3 Failed"
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph3)), Counter(['a', 'b', 'c']), "Test Case 3 Failed")
 
         graph4 = {
             'a': ['b'],
@@ -109,70 +105,67 @@ class TestMaxCliqueMethods(unittest.TestCase):
             'c': ['b', 'd'],
             'd': ['b', 'c']
         }
-        assert Counter(exact.find_max_clique_exact(graph4)) == Counter(
-            ['b', 'c', 'd']), "Test Case 4 Failed"
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph4)), Counter(['b', 'c', 'd']), "Test Case 4 Failed")
 
         graph5 = {
             'a': ['b', 'c'],
             'b': ['a'],
             'c': ['a']
         }
-        assert Counter(exact.find_max_clique_exact(graph5)) == Counter(
-            ['a', 'c']), "Test Case 5 Failed"
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph5)), Counter(['a', 'c']), "Test Case 5 Failed")
 
-   def edge_case_tests() -> None:
+    def test_edge_case_empty_graph(self) -> None:
         # Edge case tests
         graph6 = {}
-        assert Counter(exact.find_max_clique_exact(graph6)
-                       ) == Counter([]), "Empty Graph Test Failed"
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph6)), Counter([]), "Empty Graph Test Failed")
 
+    def test_edge_case_single_vertex(self) -> None:
         graph7 = {'a': []}
-        assert Counter(exact.find_max_clique_exact(graph7)) == Counter(
-            ['a']), "Single Vertex Test Failed"
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph7)), Counter(['a']), "Single Vertex Test Failed")
 
+    def test_edge_case_single_edge(self) -> None:
         graph8 = {
             'a': ['b'],
             'b': ['a']
         }
-        assert Counter(exact.find_max_clique_exact(graph8)) == Counter(
-            ['a', 'b']), "Single Edge Test Failed"
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph8)), Counter(['a', 'b']), "Single Edge Test Failed")
 
+    def test_edge_case_disconnected_graph(self) -> None:
         graph9 = {
             'a': ['b'],
             'b': ['a'],
             'c': [],
             'd': []
         }
-        assert Counter(exact.find_max_clique_exact(graph9)) == Counter(
-            ['a', 'b']), "Disconnected Graph Test Failed"
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph9)), Counter(['a', 'b']), "Disconnected Graph Test Failed")
 
+    def test_edge_case_chain_of_vertices(self) -> None:
         graph10 = {
             'a': ['b'],
             'b': ['a', 'c'],
             'c': ['b', 'd'],
             'd': ['c']
         }
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph10)), Counter(['c', 'd']), "Chain of Vertices Test Failed")
 
-        assert Counter(exact.find_max_clique_exact(graph10)) == Counter(
-            ['c', 'd']), "Chain of Vertices Test Failed"
-
+    def test_edge_case_triangle(self) -> None:
         graph11 = {
             'a': ['b', 'c'],
             'b': ['a', 'c'],
             'c': ['a', 'b']
         }
-        assert Counter(exact.find_max_clique_exact(graph11)) == Counter(
-            ['a', 'b', 'c']), "Triangle Test Failed"
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph11)), Counter(['a', 'b', 'c']), "Triangle Test Failed")
 
+    def test_edge_case_complete_graph(self) -> None:
         graph12 = {
             'a': ['b', 'c', 'd'],
             'b': ['a', 'c', 'd'],
             'c': ['a', 'b', 'd'],
             'd': ['a', 'b', 'c']
         }
-        assert Counter(exact.find_max_clique_exact(graph12)) == Counter(
-            ['a', 'b', 'c', 'd']), "Complete Graph Test Failed"
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph12)), Counter(['a', 'b', 'c', 'd']), "Complete Graph Test Failed")
 
+    def test_edge_case_larger_graph(self) -> None:
         graph13 = {
             'a': ['b', 'c'],
             'b': ['a', 'c', 'd'],
@@ -181,10 +174,9 @@ class TestMaxCliqueMethods(unittest.TestCase):
             'e': ['f'],
             'f': ['e']
         }
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph13)), Counter(['d', 'b', 'c']), "Larger Graph Test Failed")
 
-        assert Counter(exact.find_max_clique_exact(graph13)) == Counter(
-            ['d', 'b', 'c']), "Larger Graph Test Failed"
-
+    def test_edge_case_isolated_vertices(self) -> None:
         graph14 = {
             'a': ['b'],
             'b': ['a'],
@@ -192,28 +184,25 @@ class TestMaxCliqueMethods(unittest.TestCase):
             'd': ['c'],
             'e': []
         }
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph14)), Counter(['d', 'c']), "Graph with Isolated Vertices Test Failed")
 
-        assert Counter(exact.find_max_clique_exact(graph14)) == Counter(
-            ['d', 'c']), "Graph with Isolated Vertices Test Failed"
-
+    def test_edge_case_complete_bipartite_graph(self) -> None:
         graph15 = {
             'a': ['b', 'c'],
             'b': ['a', 'd'],
             'c': ['a', 'd'],
             'd': ['b', 'c']
         }
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph15)), Counter(['d', 'c']), "Complete Bipartite Graph Test Failed")
 
-        assert Counter(exact.find_max_clique_exact(graph15)) == Counter(
-            ['d', 'c']), "Complete Bipartite Graph Test Failed"
-
+    def test_edge_case_fully_connected_subgraphs(self) -> None:
         graph16 = {
             'a': ['b', 'c', 'd'],
             'b': ['a', 'c'],
             'c': ['a', 'b'],
             'd': ['a']
         }
-        assert Counter(exact.find_max_clique_exact(graph16)) == Counter(
-            ['a', 'b', 'c']), "Fully Connected Subgraphs Test Failed"
+        self.assertEqual(Counter(exact.find_max_clique_exact(graph16)), Counter(['a', 'b', 'c']), "Fully Connected Subgraphs Test Failed")
 
 if __name__ == '__main__':
     unittest.main()
