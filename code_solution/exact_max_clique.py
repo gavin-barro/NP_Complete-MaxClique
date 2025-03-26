@@ -4,14 +4,14 @@ import sys
 sys.setrecursionlimit(5000)
 
 # Key: the nodes themselves
-# Value: The nodes' neightbors that are connected with an edge
+# Value: The nodes' neighbors that are connected with an edge
 Graph = dict[str, list[str]]
 
 
-def is_clique(graph, vertices) -> bool:
+def is_clique(graph: Graph, vertices: list[str]) -> bool:
     for v in vertices:  # loops through vertices
         for u in vertices:  # loops through every other vertex in the graph
-            # sees if first vertex is different than other vertex and if the first vertex is not a niehgbor of the second
+            # sees if first vertex is different then other vertex and if the first vertex is not a neighbor of the second
             if u != v and u not in graph[v]:
                 return False  # if the pair of vertices aren't connected than they aren't in a clique
     return True  # if all vertices are connected they are a clique

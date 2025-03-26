@@ -13,19 +13,19 @@ d = [0] * MAX
 def is_clique(b):
     for i in range(1, b):
         for j in range(i + 1, b):
-            if (graph[store[i]][store[j]] == 0):
+            if graph[store[i]][store[j]] == 0:
                 return False
     return True
 
 
-def maxCliques(i, l):
-    max_ = 0
+def max_cliques(i, l):
+    max_var = 0
     for j in range(i + 1, n + 1):
         store[l] = j
-        if (is_clique(l + 1)):
-            max_ = max(max_, l)
-            max_ = max(max_, maxCliques(j, l + 1))
-    return max_
+        if is_clique(l + 1):
+            max_var = max(max_var, l)
+            max_var = max(max_var, max_cliques(j, l + 1))
+    return max_var
 
 
 def main():
@@ -56,7 +56,7 @@ def main():
         d[u_id] += 1
         d[v_id] += 1
 
-    max_clique_size = maxCliques(0, 1)
+    max_clique_size = max_cliques(0, 1)
 
     print("Max clique size:", max_clique_size)
 
